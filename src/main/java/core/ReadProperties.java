@@ -19,10 +19,16 @@ public class ReadProperties {
     public static String getUrl() {
         return properties.getProperty("url");
     }
+
     public static String getUsername() {
         return properties.getProperty("username");
     }
+
     public static String getPassword() {
         return properties.getProperty("password");
     }
+
+    public static String getBrowser() { return properties.getProperty("browser"); }
+
+    public static int getTimeout() { return Integer.parseInt(properties.getProperty("timeout")); }
 }
