@@ -4,6 +4,7 @@ import baseEntities.BaseApiTest;
 import helpers.project.ProjectHelper;
 import lombok.extern.slf4j.Slf4j;
 import models.Project;
+import org.apache.http.HttpStatus;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -31,14 +32,19 @@ public class projectsTest extends BaseApiTest {
     @Test(dataProvider = "data-provider")
     public void addProjectTest(Project project) {
         projectsList.add(projectHelper.add(project));
+
+        Assert.assertEquals(projectHelper.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test(dataProvider = "data-provider")
     public void getProjectTest(Project project) {
-        Project tmpProject = projectsList.stream().filter(c -> c.getName().equals(project.getName())).findFirst().get();
-        log.info(tmpProject.toString());
-        Project actualProject = projectHelper.getProject(tmpProject.getId());
-        log.info(actualProject.toString());
-        Assert.assertEquals(tmpProject, actualProject);
+        Project expectedProject = projectsList.stream()
+                .filter(c -> c.getName().equals(project.getName()))
+                .findFirst().get();
+
+        Project actualProject = projectHelper.getProject(expectedProject.getId());
+
+        Assert.assertEquals(projectHelper.getStatusCode(), HttpStatus.SC_OK);
+        Assert.assertEquals(actualProject, expectedProject);
     }
 }

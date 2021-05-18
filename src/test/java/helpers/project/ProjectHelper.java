@@ -10,6 +10,7 @@ import utils.ObjectUtil;
 
 @Slf4j
 public class ProjectHelper extends BaseHelper {
+    Response response;
 
     /**
      * Add a project to the app
@@ -18,7 +19,7 @@ public class ProjectHelper extends BaseHelper {
      * @return Project
      */
     public Project add(Project project) {
-        Response response = restManager.post(Endpoints.ADD_PROJECT, null, User.ADMIN, ObjectUtil.getJsonFromObject(project, Project.class));
+        response = restManager.post(Endpoints.ADD_PROJECT, null, User.ADMIN, ObjectUtil.getJsonFromObject(project, Project.class));
         return gson.fromJson(response.asString(), Project.class);
     }
 
@@ -29,9 +30,15 @@ public class ProjectHelper extends BaseHelper {
      * @return Project
      */
     public Project getProject(int id) {
-        Response response = restManager.get(Endpoints.GET_PROJECT + id, null, User.ADMIN, "");
+        response = restManager.get(Endpoints.GET_PROJECT + id, null, User.ADMIN, "");
         return gson.fromJson(response.asString(), Project.class);
     }
 
+    public Response getResponse() {
+        return response;
+    }
 
+    public int getStatusCode() {
+        return response.getStatusCode();
+    }
 }
