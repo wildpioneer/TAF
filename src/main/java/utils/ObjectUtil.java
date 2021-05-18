@@ -11,4 +11,8 @@ public class ObjectUtil {
     public static <T> T getObjectFromJson(Reader file, Class<T> tClass) {
         return gson.fromJson(file, tClass);
     }
+
+    public static String getJsonFromObject(Object object, Class tClass) {
+        return gson.toJson(object, tClass);
+    }
 }

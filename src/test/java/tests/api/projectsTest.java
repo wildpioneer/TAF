@@ -1,38 +1,44 @@
 package tests.api;
 
 import baseEntities.BaseApiTest;
-import core.ReadProperties;
 import helpers.project.ProjectHelper;
+import lombok.extern.slf4j.Slf4j;
 import models.Project;
-import org.apache.log4j.Logger;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import utils.ObjectUtil;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
+@Slf4j
 public class projectsTest extends BaseApiTest {
-    static Logger logger =  Logger.getLogger(projectsTest.class);
     ProjectHelper projectHelper = new ProjectHelper();
+    List<Project> projectsList = new ArrayList<>();
 
-
-    @Test
-    public void getProjectsTest() {
-        String response = projectHelper.getProjects();
-
-        logger.info(response);
+    @DataProvider(name = "data-provider")
+    public Object[][] dpMethod() {
+        return new Project[][]{
+                {new Project()
+                        .setName("test")
+                        .setProjectMode(1)},
+                {new Project()
+                        .setName("test1")
+                        .setProjectMode(2)}
+        };
     }
 
-    @Test
-    public void getProjectTest() throws IOException {
-        Reader reader = Files.newBufferedReader(Paths.get("/Users/aleksandr.trostyanko/Documents/Work/TechMeSkills/code/Lesson_17/TAF/src/test/resources/testData/expectedProjects.json"));
-        Project expectedProject = ObjectUtil.getObjectFromJson(reader, Project.class);
+    @Test(dataProvider = "data-provider")
+    public void addProjectTest(Project project) {
+        projectsList.add(projectHelper.add(project));
+    }
 
-        Project actualProject = projectHelper.getProject(54);
-        Assert.assertEquals(expectedProject, actualProject);
+    @Test(dataProvider = "data-provider")
+    public void getProjectTest(Project project) {
+        Project tmpProject = projectsList.stream().filter(c -> c.getName().equals(project.getName())).findFirst().get();
+        log.info(tmpProject.toString());
+        Project actualProject = projectHelper.getProject(tmpProject.getId());
+        log.info(actualProject.toString());
+        Assert.assertEquals(tmpProject, actualProject);
     }
 }
