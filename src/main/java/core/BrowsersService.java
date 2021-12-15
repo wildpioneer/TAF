@@ -10,7 +10,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public class BrowsersService {
     private WebDriver driver = null;
     private DriverManagerType driverManagerType = null;
-    private Waiters waiters;
 
     public BrowsersService() {
         this(ReadProperties.getBrowserName());
@@ -42,15 +41,9 @@ public class BrowsersService {
                 System.out.println("Browser " + browserName + " is not supported.");
                 break;
         }
-
-        waiters = new Waiters(driver, new ReadProperties().getTimeOut());
     }
 
     public WebDriver getDriver() {
         return driver;
-    }
-
-    public Waiters getWaiters() {
-        return waiters;
     }
 }
