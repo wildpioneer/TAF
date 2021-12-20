@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Main Suite">
+    <parameter name="login-value" value="Test_Login"></parameter>
+    <parameter name="psw-value" value="qwertyu_1"></parameter>
+    <test name="Smoke">
+        <classes>
+            <class name="ParamTest"></class>
+        </classes>
+    </test>
+</suite>
