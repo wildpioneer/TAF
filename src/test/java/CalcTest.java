@@ -19,6 +19,4 @@ public class CalcTest extends BaseTest {
     public void testSum2() {
         Assert.assertEquals(6, calc.sum(2, 3));
     }
-
-
 }
