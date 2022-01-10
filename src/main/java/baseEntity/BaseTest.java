@@ -9,6 +9,8 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
+import java.util.concurrent.TimeUnit;
+
 public class BaseTest {
     protected WebDriver driver;
     private DriverManagerType driverManagerType = DriverManagerType.CHROME;
@@ -27,6 +29,7 @@ public class BaseTest {
 
         driver = new ChromeDriver(chromeOptions);
 
+        driver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
         driver.get(ReadProperties.getUrl());
     }
 
