@@ -17,15 +17,11 @@ public class ActionTests extends BaseTest {
 
         Actions actions = new Actions(driver);
         actions
-                .moveToElement(source)
-                .clickAndHold()
-                .moveToElement(target)
-                .release()
-                //.dragAndDrop(source, target)
+                .dragAndDrop(source, target) // Не работает в хроме
                 .build()
                 .perform();
 
-        Thread.sleep(10000);
+        Thread.sleep(3000);
     }
 
     @Test
