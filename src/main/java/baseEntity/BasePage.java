@@ -19,6 +19,5 @@ public class BasePage {
         } catch (NoSuchElementException noSuchElementException) {
             return false;
         }
-
     }
 }

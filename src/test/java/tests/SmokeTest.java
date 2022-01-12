@@ -2,6 +2,7 @@ package tests;
 
 import baseEntity.BaseTest;
 import core.ReadProperties;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.DashboardPage;
 import pages.LoginPage;
@@ -17,5 +18,8 @@ public class SmokeTest extends BaseTest {
         loginPage.getLoginButton().click();
 
         DashboardPage dashboardPage = new DashboardPage(driver);
+        waits.waitForVisibility(dashboardPage.getAddProjectButton());
+
+        Assert.assertTrue(dashboardPage.isPageOpened());
     }
 }
