@@ -14,12 +14,12 @@ public class SmokeTest extends BaseTest {
     public void loginTest() {
         LoginPage loginPage = new LoginPage(driver);
 
-        loginPage.getEmailField().sendKeys(ReadProperties.getUsername());
-        loginPage.getPasswordField().sendKeys(ReadProperties.getPassword());
-        loginPage.getLoginButton().click();
+        loginPage.emailField.sendKeys(ReadProperties.getUsername());
+        loginPage.passwordField.sendKeys(ReadProperties.getPassword());
+        loginPage.loginBtn.click();
 
         DashboardPage dashboardPage = new DashboardPage(driver);
-        waits.waitForVisibility(dashboardPage.getAddProjectButton());
+        waits.waitForVisibility(dashboardPage.addProjectButton);
 
         Assert.assertTrue(dashboardPage.isPageOpened());
     }
@@ -28,12 +28,12 @@ public class SmokeTest extends BaseTest {
     public void flakyLoginTest() {
         LoginPage loginPage = new LoginPage(driver);
 
-        loginPage.getEmailField().sendKeys(ReadProperties.getUsername());
-        loginPage.getPasswordField().sendKeys(ReadProperties.getPassword());
-        loginPage.getLoginButton().click();
+        loginPage.emailField.sendKeys(ReadProperties.getUsername());
+        loginPage.passwordField.sendKeys(ReadProperties.getPassword());
+        loginPage.loginBtn.click();
 
         DashboardPage dashboardPage = new DashboardPage(driver);
-        waits.waitForVisibility(dashboardPage.getAddProjectButton());
+        waits.waitForVisibility(dashboardPage.addProjectButton);
 
         Assert.assertTrue(dashboardPage.isPageOpened());
     }

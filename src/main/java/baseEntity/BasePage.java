@@ -4,6 +4,7 @@ package baseEntity;
 import core.ReadProperties;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
 import utils.Waits;
 
 public abstract class BasePage {
@@ -19,6 +20,8 @@ public abstract class BasePage {
         this.driver = driver;
         this.waits = new Waits(driver);
         this.BASE_URL = ReadProperties.getUrl();
+
+        PageFactory.initElements(driver, this);
 
         if (openPageByUrl) {
             openPage();
