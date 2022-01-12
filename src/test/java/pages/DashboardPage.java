@@ -7,9 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class DashboardPage extends BasePage {
-    private static String ENDPOINT = "/dashboard";
-
-    protected static By PAGE_OPENED_IDENTIFIER = By.id("activityChart");
+    private final static String ENDPOINT = "/dashboard";
+    private final static By PAGE_OPENED_IDENTIFIER = By.id("activityChart");
 
     @FindBy(id = "sidebar-projects-add")
     public WebElement addProjectButton;
@@ -24,6 +23,6 @@ public class DashboardPage extends BasePage {
     }
 
     public boolean isPageOpened() {
-        return super.isPageOpened(PAGE_OPENED_IDENTIFIER);
+        return waits.waitForVisibility(PAGE_OPENED_IDENTIFIER).isDisplayed();
     }
 }

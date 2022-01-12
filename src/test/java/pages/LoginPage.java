@@ -7,7 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends BasePage {
-    private static String ENDPOINT = "/auth/login/";
+    private final static String ENDPOINT = "/auth/login/";
+    private final static By PAGE_OPENED_IDENTIFIER = By.id("button_primary");
 
     @FindBy(id = "name")
     public WebElement emailField;
@@ -21,8 +22,6 @@ public class LoginPage extends BasePage {
     @FindBy(className = "error-text")
     public WebElement ERROR_MESSAGE;
 
-    protected By PAGE_OPENED_IDENTIFIER = By.id("button_primary");
-
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -34,6 +33,6 @@ public class LoginPage extends BasePage {
     }
 
     public boolean isPageOpened() {
-        return super.isPageOpened(PAGE_OPENED_IDENTIFIER);
+        return waits.waitForVisibility(PAGE_OPENED_IDENTIFIER).isDisplayed();
     }
 }
