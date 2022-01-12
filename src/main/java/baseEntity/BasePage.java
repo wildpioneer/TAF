@@ -12,9 +12,17 @@ public abstract class BasePage {
     protected String BASE_URL;
 
     public BasePage(WebDriver driver) {
+        this(driver, false);
+    }
+
+    public BasePage(WebDriver driver, boolean openPageByUrl) {
         this.driver = driver;
         this.waits = new Waits(driver);
         this.BASE_URL = ReadProperties.getUrl();
+
+        if (openPageByUrl) {
+            openPage();
+        }
     }
 
     protected abstract void openPage();
