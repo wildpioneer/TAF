@@ -1,16 +1,11 @@
 package tests.api;
 
 import baseEntities.BaseApiTest;
-import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import io.restassured.response.Response;
 import models.User1;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
 
 import static io.restassured.RestAssured.given;
 
@@ -33,12 +28,16 @@ public class gsonTest extends BaseApiTest {
                 .when()
                 .get(endpoint);
 
-        Type listType = new TypeToken<ArrayList<User1>>() {
-        }.getType();
+/*
+        // Complex Type
+        Type listType = new TypeToken<ArrayList<User1>>() {}.getType();
         List<User1> actualUserList = gson.fromJson(response.getBody().asString(), listType);
+*/
 
-        System.out.println(actualUserList.get(0).toString());
-        Assert.assertEquals(user, actualUserList.get(0));
+        User1[] actualUserList = gson.fromJson(response.getBody().asString(), User1[].class);
+
+        System.out.println(actualUserList[0].toString());
+        Assert.assertEquals(user, actualUserList[0]);
     }
 
 }
