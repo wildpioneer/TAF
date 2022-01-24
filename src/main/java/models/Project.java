@@ -3,13 +3,14 @@ package models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.sun.istack.NotNull;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
-import org.apache.commons.lang3.builder.EqualsExclude;
 
 @Data
 @Accessors(chain = true)
+@Builder
 public class Project {
     @Expose(serialize = false)
     @EqualsAndHashCode.Exclude
@@ -21,7 +22,7 @@ public class Project {
     private String announcement;
     @Expose
     @SerializedName(value = "show_announcement")
-    private boolean showAnnouncement;
+    private boolean isShowAnnouncement;
     @Expose
     @SerializedName(value = "suite_mode")
     private int projectMode;

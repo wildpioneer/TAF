@@ -2,7 +2,7 @@ package core.managers;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import configuration.User;
+import configuration.UserType;
 import core.ReadProperties;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -31,9 +31,9 @@ public class RestManager {
      * @param params     path parameters.
      * @return response.
      */
-    public Response post(String requestURL, Map<String, String> params, User user, Object body) {
+    public Response post(String requestURL, Map<String, String> params, UserType userType, Object body) {
         log.info("Sending POST request to {} with parameters {}", requestURL, params);
-        RequestSpecification requestSpecification = this.getBasicRequestSpecifications(params, user, body);
+        RequestSpecification requestSpecification = this.getBasicRequestSpecifications(params, userType, body);
 
         return given(requestSpecification)
                 .log().all()
@@ -43,8 +43,8 @@ public class RestManager {
                 .extract().response();
     }
 
-    public <T> T get(String requestURL, Map<String, String> params, User user, Object body, Class<T> classOfT) {
-        return gson.fromJson(get(requestURL, params, user, body)
+    public <T> T get(String requestURL, Map<String, String> params, UserType userType, Object body, Class<T> classOfT) {
+        return gson.fromJson(get(requestURL, params, userType, body)
                 .asString().trim(), classOfT);
     }
 
@@ -55,9 +55,9 @@ public class RestManager {
      * @param params     path parameters.
      * @return response.
      */
-    public Response get(String requestURL, Map<String, String> params, User user, Object body) {
+    public Response get(String requestURL, Map<String, String> params, UserType userType, Object body) {
         log.info("Sending POST request to {} with parameters {}", requestURL, params);
-        RequestSpecification requestSpecification = this.getBasicRequestSpecifications(params, user, body);
+        RequestSpecification requestSpecification = this.getBasicRequestSpecifications(params, userType, body);
 
         return given(requestSpecification)
                 .log().all()
@@ -67,11 +67,11 @@ public class RestManager {
                 .extract().response();
     }
 
-    private RequestSpecification getBasicRequestSpecifications(Map<String, String> params, User user, Object body) {
+    private RequestSpecification getBasicRequestSpecifications(Map<String, String> params, UserType userType, Object body) {
         String username = "";
         String password = "";
 
-        switch (user) {
+        switch (userType) {
             case ADMIN:
                 username = ReadProperties.getUsername();
                 password = ReadProperties.getPassword();

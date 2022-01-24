@@ -1,7 +1,7 @@
 package helpers.project;
 
 import baseEntities.BaseHelper;
-import configuration.User;
+import configuration.UserType;
 import io.restassured.response.Response;
 import lombok.extern.slf4j.Slf4j;
 import models.Project;
@@ -19,7 +19,7 @@ public class ProjectHelper extends BaseHelper {
      * @return Project
      */
     public Project add(Project project) {
-        response = restManager.post(Endpoints.ADD_PROJECT, null, User.ADMIN, ObjectUtil.getJsonFromObject(project, Project.class));
+        response = restManager.post(Endpoints.ADD_PROJECT, null, UserType.ADMIN, ObjectUtil.getJsonFromObject(project, Project.class));
         return gson.fromJson(response.asString(), Project.class);
     }
 
@@ -30,7 +30,7 @@ public class ProjectHelper extends BaseHelper {
      * @return Project
      */
     public Project getProject(int id) {
-        response = restManager.get(Endpoints.GET_PROJECT + id, null, User.ADMIN, "");
+        response = restManager.get(Endpoints.GET_PROJECT + id, null, UserType.ADMIN, "");
         return gson.fromJson(response.asString(), Project.class);
     }
 

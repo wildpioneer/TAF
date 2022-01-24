@@ -1,5 +1,5 @@
 package configuration;
 
-public enum User {
+public enum UserType {
     ADMIN
 }

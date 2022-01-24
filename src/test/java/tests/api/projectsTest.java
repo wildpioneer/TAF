@@ -20,12 +20,14 @@ public class projectsTest extends BaseApiTest {
     @DataProvider(name = "data-provider")
     public Object[][] dpMethod() {
         return new Project[][]{
-                {new Project()
-                        .setName("test")
-                        .setProjectMode(1)},
-                {new Project()
-                        .setName("test1")
-                        .setProjectMode(2)}
+                {Project.builder()
+                        .name("test")
+                        .projectMode(1)
+                        .build()},
+                {Project.builder()
+                        .name("test1")
+                        .projectMode(2)
+                        .build()}
         };
     }
 
