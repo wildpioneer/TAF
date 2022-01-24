@@ -10,11 +10,11 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 
 public class apiTest4 extends BaseApiTest {
-    int projectID;
 
     @Test
     public void getAllUsers2() {
@@ -38,6 +38,28 @@ public class apiTest4 extends BaseApiTest {
 
     @Test
     public void getAllUsers2_1() {
+        String endpoint = "index.php?/api/v2/get_user/1";
+
+        User1 user = User1.builder()
+                .name("Alex Tros")
+                .email("atrostyanko+0401@gmail.com")
+                .isActive(true)
+                .role_id(1)
+                .role("Lead")
+                .build();
+
+        User1 result = given().get(endpoint)
+                .then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .extract()
+                .as(User1.class);
+
+        assertThat("Users are equal", result.equals(user));
+    }
+
+    @Test
+    public void getAllUsers2_2() {
         String endpoint = "/index.php?/api/v2/get_users";
         Gson gson = new Gson();
 
