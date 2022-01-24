@@ -2,6 +2,7 @@ package tests;
 
 import baseEntity.BaseTest;
 import core.ReadProperties;
+import models.User;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.DashboardPage;
@@ -16,6 +17,25 @@ public class SmokeTest extends BaseTest {
 
         loginPage.emailField.sendKeys(ReadProperties.getUsername());
         loginPage.passwordField.sendKeys(ReadProperties.getPassword());
+        loginPage.loginBtn.click();
+
+        DashboardPage dashboardPage = new DashboardPage(driver);
+        waits.waitForVisibility(dashboardPage.addProjectButton);
+
+        Assert.assertTrue(dashboardPage.isPageOpened());
+    }
+
+    @Test
+    public void builderLoginTest() {
+        User user = new User.Builder()
+                .withName(ReadProperties.getUsername())
+                .withPassword(ReadProperties.getPassword())
+                .build();
+
+        LoginPage loginPage = new LoginPage(driver);
+
+        loginPage.emailField.sendKeys(user.getUsername());
+        loginPage.passwordField.sendKeys(user.getPassword());
         loginPage.loginBtn.click();
 
         DashboardPage dashboardPage = new DashboardPage(driver);
