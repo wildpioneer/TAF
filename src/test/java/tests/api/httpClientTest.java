@@ -15,13 +15,16 @@ public class httpClientTest {
     @Test
     public void simpleApiTest() throws IOException {
         String restURL = "https://reqres.in";
+
         // Create Object and pass the url
         HttpUriRequest request = new HttpGet(restURL);
 
-        // send the response or execute the request
-        HttpResponse httpResponse = HttpClientBuilder.create().build().execute(request);
+        // send the request
+        HttpResponse httpResponse = HttpClientBuilder
+                .create()
+                .build()
+                .execute(request);
 
-        // Verify the response code is equal to 200
         Assert.assertEquals(httpResponse.getStatusLine().getStatusCode(), HttpStatus.SC_OK);
     }
 }
