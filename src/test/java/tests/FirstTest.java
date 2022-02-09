@@ -61,7 +61,8 @@ public class FirstTest {
         $(".page_title").shouldBe(visible).shouldHave(text("All Projects"));
 
         open("/index.php?/admin/projects/overview");
-        $$(By.className("hoverSensitive")).shouldHaveSize(388).find(text("123456")).find(By.tagName("a")).click();
+        $$(By.className("hoverSensitive")).shouldHaveSize(388).find(text("123456"))
+                .find(By.tagName("a")).click();
 
         $("#announcement")
                 .should(exist)
