@@ -14,7 +14,7 @@ public class LoginPage extends BasePage {
     protected By loginSelector = By.id("button_primary");
 
     public LoginPage(WebDriver driver) {
-        super(driver);
+        super(driver, true);
     }
 
     @Override
