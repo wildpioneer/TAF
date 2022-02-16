@@ -6,12 +6,20 @@ jobs:
 
     steps:
       - checkout
+
       - run: mkdir test-reports
+
       - run:
           name: Download Selenium
           command: curl -O http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar
-      - run:
-          name: Start Selenium
-          command: java -jar selenium-server-standalone-3.5.3.jar -log test-reports/selenium.log
-          background: true
+
+      #- run:
+      #    name: Start Selenium
+      #    command: java -jar selenium-server-standalone-3.5.3.jar -log test-reports/selenium.log
+      #    background: true
+
       - run: mvn clean test # run the actual tests
+
+      - store_test_results: # uploads the test metadata from the `target/surefire-reports` directory so that it can show up in the CircleCI dashboard.
+          # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
+          path: target/surefire-reports
