@@ -1,25 +1,36 @@
 version: 2
+
+# Define the jobs we want to run for this project
 jobs:
   build:
     docker:
-      - image: circleci/openjdk:8u181-jdk-browsers
+      - image: 'circleci/openjdk:latest-browsers'
 
+    working_directory: ~/repo
+    environment:
+    # get from git and get maven dependencies
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "pom.xml" }}
+            - v1-dependencies-
+      - run: mvn dependency:go-offline
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: v1-dependencies-{{ checksum "pom.xml" }}
 
-      - run: mkdir test-reports
-
+      # run tests!
       - run:
-          name: Download Selenium
-          command: curl -O http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar
-
-      #- run:
-      #    name: Start Selenium
-      #    command: java -jar selenium-server-standalone-3.5.3.jar -log test-reports/selenium.log
-      #    background: true
-
-      - run: mvn clean test # run the actual tests
-
-      - store_test_results: # uploads the test metadata from the `target/surefire-reports` directory so that it can show up in the CircleCI dashboard.
-          # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
-          path: target/surefire-reports
+          name: Running tests
+          command: mvn clean install
+      - run:
+          name: Generate allure report
+          command: mvn allure:report
+          when: always
+      - store_test_results:
+          path: target/surefire-reports/junitreports
+          when: always
+      - store_artifacts:
+          path: target/site/allure-maven-plugin/
