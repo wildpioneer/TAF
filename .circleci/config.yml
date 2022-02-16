@@ -13,7 +13,6 @@ jobs:
     # A list of available CircleCI Docker Convenience Images are available here: https://circleci.com/developer/images/image/cimg/openjdk
     docker:
       - image: circleci/openjdk:8u181-jdk-browsers
-      - image: selenium/standalone-chrome:3.5
 
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
