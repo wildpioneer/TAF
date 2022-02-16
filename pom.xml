@@ -58,6 +58,7 @@
                     <testFailureIgnore>true</testFailureIgnore>
                     <forkCount>2</forkCount>
                     <reuseForks>true</reuseForks>
+                    <useSystemClassLoader>false</useSystemClassLoader>
                     <!--suiteXmlFiles>src/test/resources/testng.xml</suiteXmlFiles-->
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
