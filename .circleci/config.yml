@@ -33,7 +33,7 @@ jobs:
           when: always
 
       - store_test_results:
-          path: target/surefire-reports
+          path: target/surefire-reports/junitreports/
           when: always
 
       - store_artifacts:
