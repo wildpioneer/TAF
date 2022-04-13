@@ -17,6 +17,6 @@ public class ExceptionTest {
 
     @Test(timeOut = 1000)
     public void waitLongTimeTest() throws InterruptedException {
-        Thread.sleep(1001);
+        Thread.sleep(800);
     }
 }

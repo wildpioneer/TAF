@@ -11,7 +11,7 @@ public class DependencyTest {
     @Test (dependsOnMethods = "stepb")
     public void steps() {
         System.out.println("Step 2...");
-        Assert.assertTrue(false);
+        Assert.assertTrue(true);
     }
 
     @Test (dependsOnMethods = {"steps"}, alwaysRun = true)

@@ -3,14 +3,14 @@ import org.testng.annotations.*;
 @Listeners(Listener.class)
 public class BaseTest {
     // Before Annotations
-    @BeforeTest
-    public void beforeTest() {
-        System.out.println("BeforeTest: ");
-    }
-
     @BeforeSuite
     public void beforeSuite() {
         System.out.println("BeforeSuite: ");
+    }
+
+    @BeforeTest
+    public void beforeTest() {
+        System.out.println("BeforeTest: ");
     }
 
     @BeforeGroups
@@ -29,14 +29,14 @@ public class BaseTest {
     }
 
     // After Annotations
-    @AfterTest
-    public void afterTest() {
-        System.out.println("AfterTest: ");
-    }
-
     @AfterSuite
     public void afterSuite() {
         System.out.println("AfterSuite: ");
+    }
+
+    @AfterTest
+    public void afterTest() {
+        System.out.println("AfterTest: ");
     }
 
     @AfterGroups

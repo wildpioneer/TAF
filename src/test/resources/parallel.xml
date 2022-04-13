@@ -8,4 +8,11 @@
             <class name="CalcTest1"></class>
         </classes>
     </test>
+    <test name="sequential">
+        <classes>
+            <class name="CalcTest"></class>
+            <class name="ParamTest"></class>
+            <class name="CalcTest1"></class>
+        </classes>
+    </test>
 </suite>
